@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Enjoy App</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --text: #111827;
+      --nav-bg: rgba(255, 255, 255, 0.72);
+      --nav-border: rgba(15, 23, 42, 0.12);
+      --nav-active: rgba(15, 23, 42, 0.1);
+      --nav-muted: rgba(17, 24, 39, 0.56);
+      --shadow: 0 16px 40px rgba(15, 23, 42, 0.18);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        color-scheme: dark;
+        --bg: #08090b;
+        --text: #f4f4f5;
+        --nav-bg: rgba(28, 28, 30, 0.72);
+        --nav-border: rgba(255, 255, 255, 0.12);
+        --nav-active: rgba(255, 255, 255, 0.14);
+        --nav-muted: rgba(244, 244, 245, 0.58);
+        --shadow: 0 16px 40px rgba(0, 0, 0, 0.42);
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #app {
+      min-height: 100dvh;
+      padding-bottom: 96px;
+    }
+
+    #bottom-nav {
+      position: fixed;
+      left: 50%;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      z-index: 50;
+      width: min(calc(100% - 28px), 430px);
+      transform: translateX(-50%);
+    }
+
+    .bottom-nav-inner {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 4px;
+      padding: 6px;
+      border: 1px solid var(--nav-border);
+      border-radius: 999px;
+      background: var(--nav-bg);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(22px) saturate(1.7);
+      -webkit-backdrop-filter: blur(22px) saturate(1.7);
+    }
+
+    .nav-item {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--nav-muted);
+      min-width: 0;
+      min-height: 54px;
+      padding: 7px 4px 6px;
+      border-radius: 999px;
+      text-decoration: none;
+      font: inherit;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+    }
+
+    .nav-item i {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .nav-item span {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .nav-item:hover,
+    .nav-item.is-active {
+      color: var(--text);
+      background: var(--nav-active);
+    }
+
+    .nav-item:active {
+      transform: scale(0.94);
+    }
+  </style>
+</head>
+
+<body>
+  <main id="app"></main>
+
+  <nav id="bottom-nav" aria-label="하단 메뉴">
+    <div class="bottom-nav-inner">
+      <button type="button" class="nav-item" onclick="goBack()" aria-label="뒤로가기">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>뒤로가기</span>
+      </button>
+
+      <a class="nav-item is-active" href="./index.html" aria-label="홈" aria-current="page">
+        <i class="fa-solid fa-house"></i>
+        <span>홈</span>
+      </a>
+
+      <a class="nav-item" href="#body" aria-label="바디">
+        <i class="fa-solid fa-person"></i>
+        <span>바디</span>
+      </a>
+
+      <a class="nav-item" href="#food" aria-label="푸드">
+        <i class="fa-solid fa-utensils"></i>
+        <span>푸드</span>
+      </a>
+
+      <a class="nav-item" href="#workout" aria-label="운동">
+        <i class="fa-solid fa-dumbbell"></i>
+        <span>운동</span>
+      </a>
+    </div>
+  </nav>
+
+  <script>
+    function goBack() {
+      if (window.history.length > 1) {
+        window.history.back();
+        return;
+      }
+
+      window.location.href = "./index.html";
+    }
+  </script>
+</body>
+</html>
